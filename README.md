@@ -4,8 +4,6 @@
 2. This code sends one page at a a time to GPT3 and usually comes in under the cap (but if one page is too dense it will return an error).
 3. Obviously there are limitations here, for example, paragraphs that bleed from one page to another. 
 
-<b>Setup</b>
-
 ### Install
 1. Use the python file and make sure you have the right libraries installed.
 2. You'll need OpenAI's library and PyPDF2 (use the PIP install command for both, or you can ask chat.openai.com for step by step instructions).
