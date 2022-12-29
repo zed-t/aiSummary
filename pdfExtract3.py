@@ -2,7 +2,7 @@ import openai
 from PyPDF2 import PdfFileReader
 
 # Create an instance of the GPT-3 model
-openai.api_key = "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"
+openai.api_key = "your api key goes here"
 
 # open the PDF file
 pdfFile = open('target.pdf', 'rb')
