@@ -2,6 +2,7 @@ import os.path
 import sys
 import math
 import openai
+#import PyCryptodome
 from PyPDF2 import PdfReader
 
 def uniquify(path):
@@ -61,27 +62,26 @@ for i in range(0, math.floor(len(rawText)/acceptableLengthGPT)):
     else:
         targetText = rawText[i*acceptableLengthGPT:len(rawText)]
 
-    page = 0
+    pages = []
     for j in range(0, numOfPages):
-        if(pageEndIndices[j]<(i+1)*acceptableLengthGPT):
-            page = j
-        else:
-            break
+        if(i*acceptableLengthGPT<=pageEndIndices[j]<(i+1)*acceptableLengthGPT):
+            pages.append(j+1)
 
     response = openai.Completion.create(
     engine="text-davinci-003",
-    prompt="Write a summary for this in the style of the New Yorker: " + targetText,
+    prompt="Write a summary for this in succint style: " + targetText,
     max_tokens=800,
     n=1,
     temperature=0.5,
 )
+
     # Print the generated summary
-    print("\n\nPage "+str(page+1)+":\n"+response["choices"][0]["text"])
+    print("\n\nPage(s) "+str(pages)+":\n"+response["choices"][0]["text"])
 
     # Open a text file for writing
     with open(summaryPath, 'a') as f:
         # Write the list of bullet point summaries to the file
-        f.writelines("\n\nPage "+str(page+1)+":\n"+response["choices"][0]["text"])
+        f.writelines("\n\nPage(s) "+str(pages)+":\n"+response["choices"][0]["text"])
 
 # close the PDF file object
 pdfFile.close()
