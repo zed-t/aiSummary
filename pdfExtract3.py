@@ -2,7 +2,7 @@ import os.path
 import sys
 import math
 import openai
-#import PyCryptodome
+import PyCryptodome
 from PyPDF2 import PdfReader
 
 def uniquify(path):
